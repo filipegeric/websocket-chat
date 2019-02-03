@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>WebSockets Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <style>
+      * {
+        font-family: tahoma;
+        font-size: 12px;
+        padding: 0px;
+        margin: 0px;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        background: -moz-linear-gradient(
+          top,
+          rgba(0, 0, 0, 0.65) 0%,
+          rgba(0, 0, 0, 0.65) 17%,
+          rgba(0, 0, 0, 0) 100%
+        ); /* FF3.6-15 */
+        background: -webkit-linear-gradient(
+          top,
+          rgba(0, 0, 0, 0.65) 0%,
+          rgba(0, 0, 0, 0.65) 17%,
+          rgba(0, 0, 0, 0) 100%
+        ); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.65) 0%,
+          rgba(0, 0, 0, 0.65) 17%,
+          rgba(0, 0, 0, 0) 100%
+        ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      }
+      h1 {
+        font-size: 30px;
+      }
+      h2 {
+        font-size: 26px;
+      }
+      #intro {
+        text-align: center;
+        padding-top: 20vh;
+      }
+      p {
+        line-height: 18px;
+      }
+      div {
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #main-content {
+        display: none;
+        position: relative;
+      }
+      #content {
+        padding: 5px;
+        background: #ddd;
+        border-radius: 5px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        margin-top: 10px;
+        height: 160px;
+      }
+      input {
+        border-radius: 2px;
+        border: 1px solid #ccc;
+        margin-top: 10px;
+        padding: 5px;
+        width: 345px;
+      }
+      #status {
+        width: 88px;
+        display: block;
+        float: left;
+        margin-top: 15px;
+      }
+      button {
+        width: 50px;
+        margin-left: 5px;
+        padding: 5px;
+        border-radius: 5px;
+        color: white;
+        background: forestgreen;
+        box-shadow: none;
+        border: solid 1px grey;
+      }
+
+      button:focus {
+        outline: none;
+      }
+
+      #tooltip {
+        position: absolute;
+        left: -40%;
+        top: 7%;
+        background: rgb(51, 233, 111);
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      #tooltip::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        transform: translateY(-50%);
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent transparent rgb(51, 233, 111);
+      }
+
+      @media (max-width: 900px) {
+        #tooltip {
+          left: 0%;
+          top: 105%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="intro">
+      <h1>Welcome to WebSockets Chat!</h1>
+      <h2>Enter your nickname to begin</h2>
+      <form id="intro-form">
+        <input id="nickname-input" type="text" placeholder="Goofy" />
+        <button type="submit">Go</button>
+      </form>
+    </div>
+
+    <div id="main-content">
+      <p id="tooltip">Hit ctrl + Q to delete chat history</p>
+      <div id="content"></div>
+      <div>
+        <span id="status">Connecting...</span>
+        <form id="main-form">
+          <input type="text" id="input" disabled="disabled" /><button
+            type="submit"
+          >
+            Send
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script src="./frontend.js"></script>
+  </body>
+</html>
